@@ -26,7 +26,7 @@ const Home = () => {
 
     return (
         <div>
-              <h2>Friends : {countries.length}</h2>
+              <h2 style={{textAlign: "center"}}>Countries : {countries.length}</h2>
               {
                 countries.map(country => <Country handleClick={handleClick} showDetailBtn={true} key={country.alpha3Code} country={country} ></Country> )
               }
