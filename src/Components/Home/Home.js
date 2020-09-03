@@ -1,20 +1,9 @@
 import React, { useState, useEffect } from "react";
-// import Friend from "../Friend/Friend";
-
-
 import Country from '../Country/Country';
+import { useHistory } from "react-router-dom";
 
 
 const Home = () => {
-
-  // const [friends, setFriends] = useState([])
-
-  // useEffect(() => {
-  //   fetch("https://jsonplaceholder.typicode.com/users")
-  //   .then(response => response.json())
-  //   .then(data => setFriends(data))
-  // }, [])
-
 
     const [countries, setCountries] = useState([]);
     useEffect(() => {
@@ -27,22 +16,19 @@ const Home = () => {
     
     }, []);
 
+    const history = useHistory();
+    const handleClick = (name) => {
 
+      const url = `/country/${name}`;
+      history.push(url);
+
+    }
 
     return (
         <div>
               <h2>Friends : {countries.length}</h2>
-
-              {/* {
-                friends.map(friend => <Friend key={friend.id} friend={friend}></Friend>)
-              } */}
-
-
-
-
-
               {
-                countries.map(country => <Country key={country.alpha3Code} country={country} ></Country> )
+                countries.map(country => <Country handleClick={handleClick} showDetailBtn={true} key={country.alpha3Code} country={country} ></Country> )
               }
               
         </div>

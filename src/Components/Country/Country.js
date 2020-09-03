@@ -1,14 +1,16 @@
 import React from 'react';
-import { Card, ListGroup, ListGroupItem, Container, Button} from "react-bootstrap";
-
+import { Card, ListGroup, ListGroupItem, Container} from "react-bootstrap";
+import { Button as MuiBtn } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 
 const Country = (props) => {
 
-    const {flag, name, capital, population} = props.country;
-
+    const {flag, name, capital, population, alpha3Code, area} = props.country;
+    
     return (
             <div>
+                
                 <Container>
                     <Card style={{width: "50%", margin: "30px", border: "5px solid tomato"}}>
                         <Card.Img style={{height: "300px"}} variant="top" src={flag} />
@@ -20,12 +22,25 @@ const Country = (props) => {
                             </Card.Text>
                         </Card.Body>
                         <ListGroup className="list-group-flush">
+                            {
+                                props.showDetailBtn === false &&
+                                <ListGroupItem>Short code name : {alpha3Code}</ListGroupItem>
+                            }
+                            {
+                                props.showDetailBtn === false &&
+                                <ListGroupItem>Area : {area}</ListGroupItem>
+                            }
                             <ListGroupItem>Capital: {capital}</ListGroupItem>
                             <ListGroupItem>Population: {population}</ListGroupItem>
                         </ListGroup>
-                        <Card.Body>
-                        <Button variant="primary">Go somewhere</Button>
-                        </Card.Body>
+                        {
+                        
+                            props.showDetailBtn === true && 
+                            <Card.Body>
+                                    <Link to={`/country/${name}`}>Country Details Link</Link>
+                                    <MuiBtn onClick={() => props.handleClick(name)} variant="contained" color="secondary">Country Details Button</MuiBtn>
+                            </Card.Body>
+                        }
                     </Card>
                 </Container>
             </div>
